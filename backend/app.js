@@ -4,7 +4,11 @@ class MessageApp {
   }
 
   post(message) {
-    this.messages.push(message)
+    this.messages.push({
+      id: this.messages.length,
+      content: message,
+      date: Date.now()
+    })
   }
 }
 

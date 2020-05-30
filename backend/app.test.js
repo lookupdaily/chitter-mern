@@ -15,7 +15,7 @@ describe('app', () => {
 
   describe('posting a message', () => {
     beforeEach(() => {
-      testApp.post('hiWorld')
+      testApp.post('Hi World')
     })
 
     it('creates a new message', () => {
@@ -23,9 +23,10 @@ describe('app', () => {
     })
   
     it('messages have date, content and id', () => {
-      expect(testApp.messages).to.include('hiWorld')
+      expect(testApp.messages[0].content).to.equal('Hi World')
+      expect(testApp.messages[0].date).not.to.equal(undefined)
+      expect(testApp.messages[0].id).to.equal(0)
     })
-
 
   })  
 
