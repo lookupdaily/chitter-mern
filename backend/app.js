@@ -10,6 +10,10 @@ class MessageApp {
       date: Date.now()
     })
   }
+
+  get(id) {
+    return this.messages[id]
+  }
 }
 
 export default MessageApp

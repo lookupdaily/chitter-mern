@@ -28,6 +28,10 @@ describe('app', () => {
       expect(testApp.messages[0].id).to.equal(0)
     })
 
+    it('can get messages by id', () => {
+      expect(testApp.get(0).content).to.equal('Hi World')
+    })
+
   })  
 
   
