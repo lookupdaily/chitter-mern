@@ -13,27 +13,33 @@ describe('app', () => {
     expect(testApp.messages.length).to.equal(0)
   })
 
-  describe('posting a message', () => {
+  describe('CRUD', () => {
+
     beforeEach(() => {
       testApp.post('Hi World')
     })
 
-    it('creates a new message', () => {
+    it('Create a message', () => {
       expect(testApp.messages.length).to.equal(1)
     })
   
-    it('messages have date, content and id', () => {
+    it('- message has date, content and id', () => {
       expect(testApp.messages[0].content).to.equal('Hi World')
       expect(testApp.messages[0].date).not.to.equal(undefined)
       expect(testApp.messages[0].id).to.equal(0)
-    })
+    }) 
 
-    it('can get messages by id', () => {
+
+    it('Read message by id', () => {
       expect(testApp.get(0).content).to.equal('Hi World')
     })
 
-  })  
+    it('Update message', () => {
+      testApp.update(0, "Hello, World!")
+      expect(testApp.get(0).content).to.equal('Hello, World!')
+    })
 
+  })
   
 
 })
