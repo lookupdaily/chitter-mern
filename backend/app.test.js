@@ -78,4 +78,11 @@ describe('app', () => {
     })
   })
 
+  describe('JSON data', () => {
+    it('reads from given file path', () => {
+      let testFileApp = new MessageApp("/\///json/\//testMessages.json")
+      expect(testFileApp.messages.length).to.equal(1)
+    })
+  })
+
 })
