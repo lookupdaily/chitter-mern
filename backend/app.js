@@ -9,6 +9,7 @@ class MessageApp {
       content: message,
       date: Date.now()
     })
+    return this.messages
   }
 
   get(id) {
@@ -19,6 +20,11 @@ class MessageApp {
     let item = this.messages[id]
     item.content = message
     return item
+  }
+
+  delete(id) {
+    this.messages.splice(id, 1)
+    return this.messages
   }
 }
 
