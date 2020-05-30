@@ -1,29 +1,32 @@
 class MessageApp {
   constructor() {
+    this.nextID = 1
     this.messages = []
   }
 
   post(message) {
     this.messages.push({
-      id: this.messages.length,
+      id: this.nextID,
       content: message,
-      date: Date.now()
+      date: new Date()
     })
+
+    this.nextID ++
     return this.messages
   }
 
   get(id) {
-    return this.messages[id]
+    return this.messages.find(message => message.id === id)
   }
 
   update(id, message) {
-    let item = this.messages[id]
-    item.content = message
-    return item
+    let index = this.messages.findIndex(message => message.id === id)
+    this.messages[index].content = message
+    return this.messages[index]
   }
 
   delete(id) {
-    this.messages.splice(id, 1)
+    this.messages = this.messages.filter(message => message.id != id)
     return this.messages
   }
 }
