@@ -31,6 +31,7 @@ class MessageApp {
 
   update(id, message) {
     let index = this._messages.findIndex(message => message.id === id)
+    if (index < 0) return "Message not found"
     if (message) {
       this._messages[index].content = message
       this.writeToJson()

@@ -95,6 +95,10 @@ describe('app', () => {
       testApp.update(1, '')
       expect(testApp.get(1).content).to.equal('Hi')
     })
+
+    it('throw error if no message exists to update', () => {
+      expect(testApp.update(0, 'update')).to.deep.equal('Message not found')
+    })
   })
 
   describe('Saving state', () => {
