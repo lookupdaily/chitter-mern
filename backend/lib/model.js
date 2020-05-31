@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-class MessageApp {
+class MessageModel {
   constructor(filepath) {
     this.nextID = 1
     this.filepath = filepath
@@ -71,4 +71,4 @@ class MessageApp {
 
 }
 
-export default MessageApp
+export default MessageModel

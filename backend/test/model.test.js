@@ -110,6 +110,9 @@ describe('app', () => {
 
     beforeEach(() => {
       testFileApp = new MessageApp("/\///json/\//testMessages.json")
+      testFileApp.allMessages.forEach((message) => {
+        testFileApp.delete(message.id)
+      })
     })
 
     afterEach(() => {
