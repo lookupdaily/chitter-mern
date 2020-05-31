@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 
 class MessageApp {
   constructor(filepath) {
@@ -51,9 +52,9 @@ class MessageApp {
   readFromJson() {
     if (JSON) {
       return JSON.parse(fs.readFileSync(
-        this.filepath,"utf8",(err,data)=>{
-          if (err) throw err
-          })
+        __dirname+path.normalize(this.filepath),"utf8",(err,data)=>{
+        if (err) throw err
+        })
       )
     }
   }
@@ -61,8 +62,8 @@ class MessageApp {
   writeToJson() {
     if (this.filepath) {
       const jsonItem = JSON.stringify(this._messages)
-      fs.writeFileSync(this.filepath, jsonItem, (err) => {
-        if (err) throw err
+      fs.writeFileSync(__dirname+path.normalize(this.filepath), jsonItem, (err) => {
+        if (err) throw err;
       })
     }
   }

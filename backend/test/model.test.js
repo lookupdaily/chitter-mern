@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import MessageApp from './app'
+import MessageApp from '../lib/model'
 
 describe('app', () => {
 
@@ -109,7 +109,7 @@ describe('app', () => {
     let testFileApp
 
     beforeEach(() => {
-      testFileApp = new MessageApp("./json/testMessages.json")
+      testFileApp = new MessageApp("/\///json/\//testMessages.json")
     })
 
     afterEach(() => {
@@ -129,14 +129,14 @@ describe('app', () => {
 
     it('writes messages to file', () => {
       testFileApp.post("Hi")
-      let testFileReadApp = new MessageApp("./json/testMessages.json")
+      let testFileReadApp = new MessageApp("/\///json/\//testMessages.json")
       expect(testFileReadApp.allMessages.length).to.equal(1)
     })
 
     it('deletes messages from file', () => {
       testFileApp.post("Hi")
       testFileApp.delete(1)
-      let testFileClearedApp = new MessageApp("./json/testMessages.json")
+      let testFileClearedApp = new MessageApp("/\///json/\//testMessages.json")
       expect(testFileClearedApp.allMessages.length).to.equal(0)
     })
   })
