@@ -10,7 +10,7 @@ describe('app', () => {
   })
 
   it('has no messages', () => {
-    expect(testApp.messages.length).to.equal(0)
+    expect(testApp.messages).to.deep.equal([])
   })
 
   describe('CRUD', () => {
@@ -63,14 +63,14 @@ describe('app', () => {
       testApp.post('2')
       testApp.delete(1)
       testApp.post('3')
-      expect(testApp.messages[1].id).to.equal(3)
+      expect(testApp.allMessages[1].id).to.equal(3)
     })
 
     it('deletes correct item by ID', () => {
       testApp.post('1')
       testApp.post('2')
       testApp.delete(1)
-      expect(testApp.messages[0].content).to.equal('2')
+      expect(testApp.allMessages[0].content).to.equal('2')
     })
 
     it('updates correct item by ID', () => {
@@ -79,6 +79,19 @@ describe('app', () => {
       testApp.delete(1)
       testApp.update(2,'update')
       expect(testApp.get(2).content).to.equal('update')
+    })
+  })
+
+  describe('Edge cases', () => {
+    let testApp
+
+    beforeEach(() => {
+      testApp = new MessageApp()
+    })
+
+    it('reject empty messages', () => {
+      testApp.post('')
+      expect(testApp.allMessages).to.deep.equal([])
     })
   })
 
@@ -96,25 +109,25 @@ describe('app', () => {
     })
 
     it('reads from given file path', () => {
-      expect(testFileApp.messages.length).to.equal(0)
+      expect(testFileApp.allMessages.length).to.equal(0)
     })
 
     it('still stores new messages in array', () => {
       testFileApp.post("Hi")
-      expect(testFileApp.messages.length).to.equal(1)
+      expect(testFileApp.allMessages.length).to.equal(1)
     })
 
     it('writes messages to file', () => {
       testFileApp.post("Hi")
       let testFileReadApp = new MessageApp("./json/testMessages.json")
-      expect(testFileReadApp.messages.length).to.equal(1)
+      expect(testFileReadApp.allMessages.length).to.equal(1)
     })
 
     it('deletes messages from file', () => {
       testFileApp.post("Hi")
       testFileApp.delete(1)
       let testFileClearedApp = new MessageApp("./json/testMessages.json")
-      expect(testFileClearedApp.messages.length).to.equal(0)
+      expect(testFileClearedApp.allMessages.length).to.equal(0)
     })
   })
 

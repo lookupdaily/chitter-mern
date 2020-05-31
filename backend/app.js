@@ -13,14 +13,16 @@ class MessageApp {
   }
 
   post(message) {
-    this.messages.push({
-      id: this.nextID,
-      content: message,
-      date: new Date()
-    })
-
-    this.nextID ++
-    this.writeToJson()
+    if (message) {
+      this.messages.push({
+        id: this.nextID,
+        content: message,
+        date: new Date()
+      })
+  
+      this.nextID ++
+      this.writeToJson()
+    }
     return this.messages
   }
 
