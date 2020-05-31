@@ -30,6 +30,18 @@ function post(content) {
   })
 }
 
+function updateMessage(id, content) {
+  return new Promise((resolve,reject) => {
+    let message = messageApp.update(id,content)
+    console.log(message)
+    if (message !== 'Message not found' || message !== []) {
+      resolve(message)
+    } else {
+      reject(message)
+    }
+  })
+}
+
 function deleteMessage(id) {
   return new Promise((resolve,reject) => {
     let result = messageApp.delete(id)
@@ -42,4 +54,4 @@ function deleteMessage(id) {
   })
 }
 
-export { getAll, post, deleteMessage }
+export { getAll, post, updateMessage, deleteMessage }

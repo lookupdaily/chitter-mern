@@ -4,6 +4,7 @@ import { expect } from 'chai'
 import MessageApp from "../app.js"
 
 describe("message API endpoint tests", function(){
+
   it("posts a message", (done) => {
     let data = {
       content: "Hello, World"
@@ -30,6 +31,23 @@ describe("message API endpoint tests", function(){
         return done(err)
       }
       expect(res.body.length).to.equal(1)
+      done()
+    })
+  })
+
+  it("updates a message", (done) => {
+    let data = {
+      content: "Hi world"
+    }
+
+    const res = request(MessageApp)
+    .put('/update/1')
+    .send(data)
+    .set('Accept','application/json')
+    res.expect(200)
+    .end((err,res) => {
+      if (err) { return done(err) }
+      expect(res.body.content).to.equal('Hi world')
       done()
     })
   })
