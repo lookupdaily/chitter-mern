@@ -89,6 +89,12 @@ describe('app', () => {
       testApp.post('')
       expect(testApp.allMessages).to.deep.equal([])
     })
+
+    it('reject empty update', () => {
+      testApp.post('Hi')
+      testApp.update(1, '')
+      expect(testApp.get(1).content).to.equal('Hi')
+    })
   })
 
   describe('Saving state', () => {

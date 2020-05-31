@@ -31,8 +31,10 @@ class MessageApp {
 
   update(id, message) {
     let index = this._messages.findIndex(message => message.id === id)
-    this._messages[index].content = message
-    this.writeToJson()
+    if (message) {
+      this._messages[index].content = message
+      this.writeToJson()
+    }
     return this._messages[index]
   }
 
