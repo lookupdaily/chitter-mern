@@ -97,11 +97,11 @@ describe('app', () => {
     })
 
     it('return error if no message exists to update', () => {
-      expect(testApp.update(0, 'update')).to.deep.equal('Message not found')
+      expect(testApp.update(1, 'update')).to.deep.equal('Message not found')
     })
 
     it('return error if no message to delete', () => {
-      expect(testApp.delete(0)).to.deep.equal('Message not found')
+      expect(testApp.delete(1)).to.deep.equal('Message not found')
     })
   })
 
