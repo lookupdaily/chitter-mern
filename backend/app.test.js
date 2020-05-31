@@ -10,7 +10,7 @@ describe('app', () => {
   })
 
   it('has no messages', () => {
-    expect(testApp.messages).to.deep.equal([])
+    expect(testApp.allMessages).to.deep.equal([])
   })
 
   describe('CRUD', () => {
@@ -22,23 +22,19 @@ describe('app', () => {
     describe('Create messages', () => {
 
       it('stores new messages', () => {
-        expect(testApp.messages.length).to.equal(1)
+        expect(testApp.allMessages.length).to.equal(1)
       })
     
       it('message has date, content and id', () => {
-        expect(testApp.messages[0].content).to.equal('Hi World')
-        expect(testApp.messages[0].date).not.to.equal(undefined)
-        expect(testApp.messages[0].id).to.equal(1)
+        expect(testApp.allMessages[0].content).to.equal('Hi World')
+        expect(testApp.allMessages[0].date).not.to.equal(undefined)
+        expect(testApp.allMessages[0].id).to.equal(1)
       }) 
 
     })
 
     it('Read message by id', () => {
       expect(testApp.get(1).content).to.equal('Hi World')
-    })
-
-    it('Read all messages', () => {
-      expect(testApp.allMessages.length).to.equal(1)
     })
 
     it('Update message', () => {
@@ -103,7 +99,7 @@ describe('app', () => {
     })
 
     afterEach(() => {
-      testFileApp.messages.forEach((message) => {
+      testFileApp.allMessages.forEach((message) => {
         testFileApp.delete(message.id)
       })
     })

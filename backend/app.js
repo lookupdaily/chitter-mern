@@ -1,20 +1,19 @@
 import fs from 'fs'
-import path from 'path'
 
 class MessageApp {
   constructor(filepath) {
     this.nextID = 1
     this.filepath = filepath
-    this.messages = filepath ? this.readFromJson() : []
+    this._messages = filepath ? this.readFromJson() : []
   }
 
   get allMessages() {
-    return this.messages
+    return this._messages
   }
 
   post(message) {
     if (message) {
-      this.messages.push({
+      this._messages.push({
         id: this.nextID,
         content: message,
         date: new Date()
@@ -23,24 +22,24 @@ class MessageApp {
       this.nextID ++
       this.writeToJson()
     }
-    return this.messages
+    return this._messages
   }
 
   get(id) {
-    return this.messages.find(message => message.id === id)
+    return this._messages.find(message => message.id === id)
   }
 
   update(id, message) {
-    let index = this.messages.findIndex(message => message.id === id)
-    this.messages[index].content = message
+    let index = this._messages.findIndex(message => message.id === id)
+    this._messages[index].content = message
     this.writeToJson()
-    return this.messages[index]
+    return this._messages[index]
   }
 
   delete(id) {
-    this.messages = this.messages.filter(message => message.id != id)
+    this._messages = this._messages.filter(message => message.id != id)
     this.writeToJson()
-    return this.messages
+    return this._messages
   }
 
   readFromJson() {
@@ -55,7 +54,7 @@ class MessageApp {
 
   writeToJson() {
     if (this.filepath) {
-      const jsonItem = JSON.stringify(this.messages)
+      const jsonItem = JSON.stringify(this._messages)
       fs.writeFileSync(this.filepath, jsonItem, (err) => {
         if (err) throw err
       })
