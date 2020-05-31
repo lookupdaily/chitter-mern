@@ -1,9 +1,15 @@
 import express from 'express'
 const app = express()
+import MessageApp from './lib/model'
+
+let messageApp = new MessageApp("/\///json/\//testMessages.json")
 
 app.get('/', function (req, res) {
-   res.send({val:'Hello World'})
+  let result = messageApp.allMessages
+  res.json(result)
 })
-app.listen(3001)
+app.listen(3001, () => {
+  console.log('connected')
+})
 
 export default app
