@@ -41,7 +41,7 @@ class MessageModel {
   }
 
   delete(id) {
-    let index = this._messages.findIndex(message => message.id === id)
+    let index = this._messages.findIndex(message => message.id == id)
     if (index < 0) return "Message not found"
 
     this._messages.splice(index, 1)

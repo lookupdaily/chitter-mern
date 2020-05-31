@@ -30,4 +30,16 @@ function post(content) {
   })
 }
 
-export { getAll, post }
+function deleteMessage(id) {
+  return new Promise((resolve,reject) => {
+    let result = messageApp.delete(id)
+    
+    if (result !== 'Message not found') {
+      resolve(result)
+    } else {
+      reject(result)
+    }
+  })
+}
+
+export { getAll, post, deleteMessage }
