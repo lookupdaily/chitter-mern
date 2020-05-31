@@ -8,6 +8,10 @@ class MessageApp {
     this.messages = filepath ? this.readFromJson() : []
   }
 
+  get allMessages() {
+    return this.messages
+  }
+
   post(message) {
     this.messages.push({
       id: this.nextID,

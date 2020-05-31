@@ -37,6 +37,10 @@ describe('app', () => {
       expect(testApp.get(1).content).to.equal('Hi World')
     })
 
+    it('Read all messages', () => {
+      expect(testApp.allMessages.length).to.equal(1)
+    })
+
     it('Update message', () => {
       testApp.update(1, "Hello, World!")
       expect(testApp.get(1).content).to.equal('Hello, World!')
@@ -78,7 +82,7 @@ describe('app', () => {
     })
   })
 
-  describe('JSON data', () => {
+  describe('Saving state', () => {
     let testFileApp
 
     beforeEach(() => {
