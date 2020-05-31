@@ -1,13 +1,12 @@
 import express from 'express'
+import router from './lib/routes'
 const app = express()
-import MessageApp from './lib/model'
 
-let messageApp = new MessageApp("/\///json/\//testMessages.json")
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.get('/', function (req, res) {
-  let result = messageApp.allMessages
-  res.json(result)
-})
+app.use(router)
+
 app.listen(3001, () => {
   console.log('connected')
 })

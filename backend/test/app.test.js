@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import MessageApp from "../app.js"
 
 describe("message API endpoint tests", function(){
-  it.only("gets from backend messages", function(done) {
+  it("gets from backend messages", function(done) {
     const res = request(MessageApp)
     .get("/")
     res.expect(200)
@@ -12,7 +12,7 @@ describe("message API endpoint tests", function(){
       if (err) {
         return done(err)
       }
-      expect(res.body.length).to.equal(1)
+      expect(res.body.length).to.equal(0)
       done()
     })
   })
