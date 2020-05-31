@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import MessageApp from "../app.js"
 
 describe("message API endpoint tests", function(){
-  it("posts a message", function(done) {
+  it("posts a message", (done) => {
     let data = {
       content: "Hello, World"
     }
@@ -21,11 +21,11 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it("gets messages from backend", function(done) {
+  it("gets messages from backend", (done) => {
     const res = request(MessageApp)
     .get("/")
     res.expect(200)
-    .end(function(err,res) {
+    .end((err,res) => {
       if (err) {
         return done(err)
       }
@@ -34,12 +34,12 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it("deletes a message", function(done) {
+  it("deletes a message", (done) => {
     const res = request(MessageApp)
     .delete('/delete/1')
     .set('Accept', 'application/json')
     res.expect(200)
-    .end(function(err,res) {
+    .end((err,res) => {
       if (err) {
         return done(err)
       }
