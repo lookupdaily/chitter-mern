@@ -79,9 +79,38 @@ describe('app', () => {
   })
 
   describe('JSON data', () => {
+    let testFileApp
+
+    beforeEach(() => {
+      testFileApp = new MessageApp("./json/testMessages.json")
+    })
+
+    afterEach(() => {
+      testFileApp.messages.forEach((message) => {
+        testFileApp.delete(message.id)
+      })
+    })
+
     it('reads from given file path', () => {
-      let testFileApp = new MessageApp("/\///json/\//testMessages.json")
+      expect(testFileApp.messages.length).to.equal(0)
+    })
+
+    it('still stores new messages in array', () => {
+      testFileApp.post("Hi")
       expect(testFileApp.messages.length).to.equal(1)
+    })
+
+    it('writes messages to file', () => {
+      testFileApp.post("Hi")
+      let testFileReadApp = new MessageApp("./json/testMessages.json")
+      expect(testFileReadApp.messages.length).to.equal(1)
+    })
+
+    it('deletes messages from file', () => {
+      testFileApp.post("Hi")
+      testFileApp.delete(1)
+      let testFileClearedApp = new MessageApp("./json/testMessages.json")
+      expect(testFileClearedApp.messages.length).to.equal(0)
     })
   })
 

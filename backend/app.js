@@ -16,6 +16,7 @@ class MessageApp {
     })
 
     this.nextID ++
+    this.writeToJson()
     return this.messages
   }
 
@@ -26,21 +27,36 @@ class MessageApp {
   update(id, message) {
     let index = this.messages.findIndex(message => message.id === id)
     this.messages[index].content = message
+    this.writeToJson()
     return this.messages[index]
   }
 
   delete(id) {
     this.messages = this.messages.filter(message => message.id != id)
+    this.writeToJson()
     return this.messages
   }
 
   readFromJson() {
-    return JSON.parse(fs.readFileSync(
-      __dirname+path.normalize(this.filepath),"utf8",(err,data)=>{
-        if (err) throw err
-        })
-    )
+    if (JSON) {
+      return JSON.parse(fs.readFileSync(
+        this.filepath,"utf8",(err,data)=>{
+          if (err) throw err
+          })
+      )
+    }
   }
+
+  writeToJson() {
+    if (this.filepath) {
+      const jsonItem = JSON.stringify(this.messages)
+      fs.writeFileSync(this.filepath, jsonItem, (err) => {
+        if (err) throw err
+      })
+    }
+  }
+
+
 }
 
 export default MessageApp
