@@ -27,7 +27,7 @@ class MessageModel {
   }
 
   get(id) {
-    return this._messages.find(message => message.id === id)
+    return this._messages.find(message => message.id == id)
   }
 
   update(id, message) {

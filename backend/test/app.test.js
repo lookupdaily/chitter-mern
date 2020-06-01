@@ -35,6 +35,19 @@ describe("message API endpoint tests", function(){
     })
   })
 
+  it('gets one message', (done) => {
+    const res = request(MessageApp)
+    .get("/1")
+    res.expect(200)
+    .end((err,res) => {
+      if (err) {
+        return done(err)
+      }
+      expect(res.body.content).to.equal('Hello, World')
+      done()
+    })
+  })
+
   it("updates a message", (done) => {
     let data = {
       content: "Hi world"

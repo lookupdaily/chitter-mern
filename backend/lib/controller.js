@@ -19,6 +19,17 @@ function getAll() {
   })
 }
 
+function getSingleMessage(id) {
+  return new Promise((resolve,reject) => {
+    let result = messageApp.get(id)
+    if (result) {
+      resolve(result)
+    } else {
+      reject(result)
+    }
+  })
+}
+
 function post(content) {
   return new Promise((resolve,reject) => {
     let message = messageApp.post(content)
@@ -33,7 +44,6 @@ function post(content) {
 function updateMessage(id, content) {
   return new Promise((resolve,reject) => {
     let message = messageApp.update(id,content)
-    console.log(message)
     if (message !== 'Message not found' || message !== []) {
       resolve(message)
     } else {
@@ -54,4 +64,10 @@ function deleteMessage(id) {
   })
 }
 
-export { getAll, post, updateMessage, deleteMessage }
+export { 
+  getAll, 
+  getSingleMessage, 
+  post, 
+  updateMessage, 
+  deleteMessage 
+}

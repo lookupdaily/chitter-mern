@@ -44,7 +44,7 @@ describe('app', () => {
 
     it('Delete message', () => {
       testApp.delete(1)
-      expect(testApp.get(1)).to.equal(undefined)
+      expect(testApp.allMessages).to.deep.equal([])
     })
 
   })
@@ -94,6 +94,10 @@ describe('app', () => {
       testApp.post('Hi')
       testApp.update(1, '')
       expect(testApp.get(1).content).to.equal('Hi')
+    })
+
+    it('returns undefined if no message exists to get', () => {
+      expect(testApp.get(1)).to.equal(undefined)
     })
 
     it('return error if no message exists to update', () => {
