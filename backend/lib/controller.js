@@ -33,10 +33,10 @@ function getSingleMessage(id) {
 function post(content) {
   return new Promise((resolve,reject) => {
     let message = messageApp.post(content)
-    if (message !== []) {
+    if (message.length !== 0) {
       resolve(message)
     } else {
-      reject(message)
+      reject("You can't post an empty message")
     }
   })
 }

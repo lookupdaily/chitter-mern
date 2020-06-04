@@ -80,7 +80,21 @@ describe("message API endpoint tests", function(){
   })
 
   describe("error handling", () => {
-    //TODO
+    it("catch empty messages", (done) => {
+      let data = {
+        content: ""
+      }
+      const res = request(MessageApp)
+      .post('/message')
+      .send(data)
+      .set('Accept','application/json')
+      res.expect(404)
+      .end((err,res) => {
+        if (err) { return done(err) }
+        expect(res.body).to.equal("You can't post an empty message")
+        done()
+      })
+    })
   })
 })
 
