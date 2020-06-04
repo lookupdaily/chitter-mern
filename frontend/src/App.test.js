@@ -15,10 +15,10 @@ describe('App', () => {
     component = mount(<MessageApp/>)
   })
 
-  // it('renders without crashing', () => {
-  //   const component = mount(<MessageApp/>)
-  //   expect(component).toMatchSnapshot()
-  // })
+  it('renders without crashing', () => {
+    const component = mount(<MessageApp/>)
+    expect(component).toMatchSnapshot()
+  })
 
   it('has text box', () => {
     expect(component.exists('textarea#message_box')).toBe(true)
