@@ -1,17 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
+import MessageForm from './components/messageForm/messageForm'
 import './App.css';
 
 function MessageApp() {
   return (
     <div className="App">
-      <textarea id="message_box"></textarea>
-      <button 
-        type="submit"
-        name="Submit"
-        id="submit">
-        Submit  
-      </button>
+      <MessageForm/>
       <ul id="message_list">
         message
       </ul>
