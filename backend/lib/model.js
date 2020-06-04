@@ -20,8 +20,8 @@ class MessageModel {
         date: new Date()
       })
   
-      this.nextID ++
       this.writeToJson()
+      this.nextID ++
     }
     return this._messages
   }

@@ -44,10 +44,10 @@ function post(content) {
 function updateMessage(id, content) {
   return new Promise((resolve,reject) => {
     let message = messageApp.update(id,content)
-    if (message !== 'Message not found' || message !== []) {
+    if (message !== 'Message not found') {
       resolve(message)
     } else {
-      reject(message)
+      reject('Message not found')
     }
   })
 }

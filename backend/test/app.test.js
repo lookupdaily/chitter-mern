@@ -5,7 +5,7 @@ import MessageApp from "../app.js"
 
 describe("message API endpoint tests", function(){
 
-  it("posts a message", (done) => {
+  it("post a message", (done) => {
     let data = {
       content: "Hello, World"
     }
@@ -22,7 +22,7 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it("gets messages from backend", (done) => {
+  it("get all messages from backend", (done) => {
     const res = request(MessageApp)
     .get("/")
     res.expect(200)
@@ -35,7 +35,7 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it('gets one message', (done) => {
+  it('get single message', (done) => {
     const res = request(MessageApp)
     .get("/1")
     res.expect(200)
@@ -48,7 +48,7 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it("updates a message", (done) => {
+  it("update a message", (done) => {
     let data = {
       content: "Hi world"
     }
@@ -65,7 +65,7 @@ describe("message API endpoint tests", function(){
     })
   })
 
-  it("deletes a message", (done) => {
+  it("delete a message", (done) => {
     const res = request(MessageApp)
     .delete('/delete/1')
     .set('Accept', 'application/json')
@@ -117,6 +117,37 @@ describe("message API endpoint tests", function(){
         done()
       })
     })
+
+    it("update, when message not found", (done) => {
+      let data = {
+        content: "Hi world"
+      }
+  
+      const res = request(MessageApp)
+      .put('/update/567')
+      .send(data)
+      .set('Accept','application/json')
+      res.expect(404)
+      .end((err,res) => {
+        if (err) { return done(err) }
+        expect(res.body).to.equal('Message not found')
+        done()
+      })
+    })
+
+    it("delete, when message not found", (done) => {
+      const res = request(MessageApp)
+      .delete('/delete/1023')
+      .set('Accept', 'application/json')
+      res.expect(404)
+      .end((err,res) => {
+        if (err) { return done(err) }
+        console.log(res.body)
+        expect(res.body).to.equal('Message not found')
+        done()
+      })
+    })
+
   })
 })
 
