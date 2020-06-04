@@ -95,6 +95,17 @@ describe("message API endpoint tests", function(){
         done()
       })
     })
+
+    it("getAll errors if no messages", (done) => {
+      const res = request(MessageApp)
+      .get("/")
+      res.expect(404)
+      .end((err,res) => {
+        if (err) { return done(err) }
+        expect(res.body).to.equal("There are no messages yet")
+        done()
+      })
+    })
   })
 })
 
