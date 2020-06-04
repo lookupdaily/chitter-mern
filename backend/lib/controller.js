@@ -25,7 +25,7 @@ function getSingleMessage(id) {
     if (result) {
       resolve(result)
     } else {
-      reject(result)
+      reject('Message not found')
     }
   })
 }

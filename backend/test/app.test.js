@@ -80,7 +80,7 @@ describe("message API endpoint tests", function(){
   })
 
   describe("error handling", () => {
-    it("catch empty messages", (done) => {
+    it("post, catch empty messages", (done) => {
       let data = {
         content: ""
       }
@@ -96,13 +96,24 @@ describe("message API endpoint tests", function(){
       })
     })
 
-    it("getAll errors if no messages", (done) => {
+    it("getAll, when no messages in db", (done) => {
       const res = request(MessageApp)
       .get("/")
       res.expect(404)
       .end((err,res) => {
         if (err) { return done(err) }
         expect(res.body).to.equal("There are no messages yet")
+        done()
+      })
+    })
+
+    it("getSingleMessage, when cannot find single message", (done) => {
+      const res = request(MessageApp)
+      .get("/1")
+      res.expect(404)
+      .end((err,res) => {
+        if (err) { return done(err) }
+        expect(res.body).to.equal('Message not found')
         done()
       })
     })
