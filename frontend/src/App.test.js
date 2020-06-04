@@ -23,4 +23,12 @@ describe('App', () => {
   it('has text box', () => {
     expect(component.exists('textarea#message_box')).toBe(true)
   })
+
+  it('has submit button', () => {
+    expect(component.exists('button#submit')).toBe(true)
+  })
+
+  it('has message list', () => {
+    expect(component.exists('ul#message_list')).toBe(true)
+  })
 })
