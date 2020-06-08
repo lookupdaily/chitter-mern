@@ -10,19 +10,31 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('Form', () => {
   let component
 
-  beforeEach(() => {
-    component = mount(<MessageForm/>)
-  })
-
   it('renders without crashing', () => {
+    component = mount(<MessageForm/>)
     expect(component).toMatchSnapshot()
   })
 
-  it('has text box', () => {
-    expect(component.exists('textarea#message_box')).toBe(true)
+  it('should update message state when text entered', () => {
+    component = shallow(<MessageForm/>)
+    component.find('textarea#message_box').simulate('change', {
+      target: { value: 'Hello' }
+    })
+    expect(component.state('currentMessage')).toEqual('Hello')
   })
 
-  it('has submit button', () => {
-    expect(component.exists('button#submit')).toBe(true)
+  it('should clear current message upon submit', () => {
+    component = mount(<MessageForm
+      submitMessage={function(item){return true}}
+    />)
+    component.find('textarea#message_box').simulate('change', {
+      target: { value: 'Hello' }
+    })
+    component.find('form').simulate('submit')
+
+    expect(component.find('textarea#message_box').props().value).toEqual('')
+    expect(component.state('currentMessage')).toEqual('')
   })
+  
+
 })

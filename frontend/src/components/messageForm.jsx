@@ -1,10 +1,35 @@
 import React from 'react'
 
 class MessageForm extends React.Component {
+  constructor() { 
+    super()
+    this.state = {
+      currentMessage: ''
+    }
+  }
+
+  changeMessageValue(change) {
+    this.setState({
+      currentMessage: change
+    })
+  }
+
+  processSubmit(e) {
+    e.preventDefault()
+    this.changeMessageValue('')
+  }
+
   render() {
     return(
-      <form id="message_form">
-        <textarea id="message_box"></textarea>
+      <form 
+        ref='formRef'
+        onSubmit={(e) => this.processSubmit(e)}
+        id="message_form">
+        <textarea 
+          onChange={(e) => this.changeMessageValue(e.target.value)}
+          value={this.state.currentMessage}
+          id="message_box">
+        </textarea>
         <button 
           type="submit"
           name="Submit"
