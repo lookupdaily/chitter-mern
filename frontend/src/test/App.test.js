@@ -15,8 +15,10 @@ describe('App', () => {
   beforeEach(() => {
     const data = { data: [] }
     const messages = {data: [{id:1, content:'hello', date:'2000'}]}
+    
     axios.post.mockImplementation(() => Promise.resolve(data))
     axios.get.mockResolvedValue(messages)
+
     component = mount(<MessageApp/>)
   })
 
