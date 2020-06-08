@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import MessageApp from './App';
-import mockAxios from './_mocks_/axios'
+import MessageApp from '../App';
+import mockAxios from '../_mocks_/axios'
 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
@@ -19,7 +18,6 @@ describe('App', () => {
     })
 
     it('renders without crashing', () => {
-      const component = mount(<MessageApp/>)
       expect(component).toMatchSnapshot()
     })
 
