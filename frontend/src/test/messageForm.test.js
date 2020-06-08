@@ -8,15 +8,15 @@ import { mount, shallow } from 'enzyme'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('Form', () => {
-  let component
+  // let component
 
   it('renders without crashing', () => {
-    component = mount(<MessageForm/>)
+    const component = mount(<MessageForm/>)
     expect(component).toMatchSnapshot()
   })
 
   it('should update message state when text entered', () => {
-    component = shallow(<MessageForm/>)
+    const component = shallow(<MessageForm/>)
     component.find('textarea#message_box').simulate('change', {
       target: { value: 'Hello' }
     })
@@ -24,7 +24,7 @@ describe('Form', () => {
   })
 
   it('should clear current message upon submit', () => {
-    component = mount(<MessageForm
+    const component = mount(<MessageForm
       submitMessage={function(item){return true}}
     />)
     component.find('textarea#message_box').simulate('change', {
