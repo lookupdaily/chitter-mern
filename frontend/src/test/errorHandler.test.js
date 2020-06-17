@@ -16,16 +16,12 @@ describe('Error', () => {
 
   it('empty without error', () => {
     const component = shallow(<ErrorHandler/>)
-    expect(component.find('div#error').text().toBe('')
+    expect(component.find('#error').text()).toBe('')
   })
 
-  it('displays with error', async () => {
-    const component = mount(<ErrorHandler
-      error={{data: errorMock}}
-    />)
+  it('displays with error', async function() {
+    const component = mount(<ErrorHandler error={errorMock}/>)
     await component.update()
-    expect(component.find('#error').text()).toBe({"response":
-      {"data": "error text from json mock"}
-    })
+    expect(component.find('#error').text()).toBe("Error: error text from json mock")
   })
 })

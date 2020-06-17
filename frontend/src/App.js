@@ -22,6 +22,7 @@ class MessageApp extends React.Component {
     this.setState({
       error: error
     })
+    console.log('in app',this.state)
   }
 
   setMessages(messages){
@@ -37,6 +38,7 @@ class MessageApp extends React.Component {
     })
     .catch((err) => {
       this.setError(err)
+      console.log('in get', this.state)
     })
   }
 
@@ -51,10 +53,11 @@ class MessageApp extends React.Component {
   }
 
   render() {
+    if (this.state.error) console.log('in renderer', this.state.error)
     return (
       <div className="App">
         <ErrorHandler
-        error={this.state.error}
+        error={this.state.error}/>
         <MessageForm
         ref='messageFormRef'
         submitMessage={this.submitMessage}/>
